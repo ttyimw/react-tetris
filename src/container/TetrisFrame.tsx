@@ -6,8 +6,9 @@ import {tetriMino} from './mino'
 import './tetrisFrame.scss'
 import { GGameOver, GameOverProps } from '../stories/GameOver'
 import { Title, TitleProps } from '../stories/Title'
+import {useWindowSize} from 'react-use';
 
-const offset = {x:2, y:2}
+// const offset = {x:2, y:2}
 let timeout:any
 export const TetrisFrame: FC = ()=>{
     const [presentMino, setPresentMino] = useState([[0]])
@@ -20,6 +21,14 @@ export const TetrisFrame: FC = ()=>{
     const [action, setAction] = useState(false)
     const [score,  setScore]  = useState(0)
     const [level,  setLevel]  = useState(1)
+    const [offset, setOffset] = useState({x:2, y:2})
+
+    const { width, height } = useWindowSize();
+    
+    //画面位置調節
+    useEffect(() => {
+        setOffset({x: width/60 - 11, y: 2})
+    }, [width, height]);
 
     const inputRef = useRef<HTMLInputElement>(null);
     const reset=()=>{
@@ -143,7 +152,7 @@ export const TetrisFrame: FC = ()=>{
     let gameOverArgs:GameOverProps = {
         structure:GameOver,
         colorNum: 8,
-        locationX: 0 + offset.x,
+        locationX: 0 + offset.x - 10,
         locationY: 0 + offset.y,
         onClick  : {
             retry: ()=>{reset()},
@@ -153,7 +162,7 @@ export const TetrisFrame: FC = ()=>{
     let titleArgs:TitleProps = {
         structure:_Title,
         colorNum: 0,
-        locationX: 0 + offset.x,
+        locationX: 0 + offset.x - 5,
         locationY: 0 + offset.y,
         onClick  : {
             retry: ()=>{reset()},
