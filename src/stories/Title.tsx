@@ -2,7 +2,7 @@ import React from 'react'
 import {Mino} from './Mino'
 import './gameOver.scss'
 
-interface Parts {
+export interface TitleProps {
     structure : number[][]
     colorNum? : number
     locationX?: number
@@ -12,17 +12,15 @@ interface Parts {
 
 interface OnClick {
     retry: ()=>void,
-    top  : ()=>void,
+    config: ()=>void,
 }
-
-export type GameOverProps = Parts
 
 /**
  * Mino
  */
-export const GGameOver: React.FC<GameOverProps> = (props) => {
+export const Title: React.FC<TitleProps> = (props) => {
     let mino=[]
-    let args: Parts = {
+    let args: TitleProps = {
         structure: props.structure,
         colorNum : props.colorNum  || 0,
         locationX: props.locationX || 0,
@@ -31,10 +29,10 @@ export const GGameOver: React.FC<GameOverProps> = (props) => {
     mino.push(<Mino {...args}/>)
     return (
         <>
-            <div className="gameover" style={{'position':'absolute', 'width': '100%','height':'100%','backgroundColor':'#888888aa'}}>
+            <div className="gameover" style={{'position':'absolute', 'width': '100%','height':'100%','backgroundColor':'#000'}}>
                 <div className="span__gameover1">
-                    <div {...{onClick: props.onClick?.retry}}>RETRY</div>
-                    <div {...{onClick: props.onClick?.top}}>&nbsp;TOP</div>
+                    <div {...{onClick: props.onClick?.retry}}>START</div>
+                    <div {...{onClick: props.onClick?.config}}>CONFIG</div>
                 </div>
                 {mino}
             </div>

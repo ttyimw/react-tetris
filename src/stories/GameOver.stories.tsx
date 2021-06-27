@@ -10,9 +10,9 @@ export default {
 
 const Template: Story<GameOverProps> = (args) => <GGameOver {...args} />
 export const Stack1 = Template.bind({})
-Stack1.args = [{
+Stack1.args = {
     structure: GameOver,
     colorNum: 0,
     locationX: 1,
     locationY: 1
-}]
+}

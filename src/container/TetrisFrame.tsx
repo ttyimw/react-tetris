@@ -1,9 +1,12 @@
 import React, { FC, useRef, useState, useEffect } from 'react'
-import {Base, GameOver, PrevMinoFrame} from '../stories/structure'
+import {Base, GameOver, PrevMinoFrame, _Title} from '../stories/structure'
 import {Frame, FrameProps} from '../stories/Frame'
 import { keyDown, merge, checkCrush, flashLine, deleteLine, checkGameOver} from './event'
 import {tetriMino} from './mino'
 import './tetrisFrame.scss'
+import { GGameOver, GameOverProps } from '../stories/GameOver'
+import { Title, TitleProps } from '../stories/Title'
+
 const offset = {x:2, y:2}
 let timeout:any
 export const TetrisFrame: FC = ()=>{
@@ -12,7 +15,7 @@ export const TetrisFrame: FC = ()=>{
     const [fixed,       setFixed]       = useState(Base)
     const [positionx, setPositionx] = useState(4)
     const [positiony, setPositiony] = useState(0)
-    const [gameover, setGameover]   = useState(true)
+    const [gameMode, setGameMode]   = useState(0)
     const [moment, setMoment] = useState(false)
     const [action, setAction] = useState(false)
     const [score,  setScore]  = useState(0)
@@ -23,7 +26,7 @@ export const TetrisFrame: FC = ()=>{
         setPositionx(4)
         setPositiony(0)
         setMoment(!moment)
-        setGameover(false)
+        setGameMode(1)
         setScore(0)
         setLevel(1)
         setFixed(Base)
@@ -64,7 +67,7 @@ export const TetrisFrame: FC = ()=>{
             }
             if(checkGameOver(fixed)) {
                 clearTimeout(timeout)
-                setGameover(true)
+                setGameMode(2)
                 return
             }
 
@@ -128,12 +131,7 @@ export const TetrisFrame: FC = ()=>{
             locationX: 13 + offset.x,
             locationY: 0 + offset.y,
         },
-        // {
-        //     structure:GameOver,
-        //     colorNum: 0,
-        //     locationX: 0,
-        //     locationY: 0,
-        // }
+        
         ],
         scoreProps: {
             score: score,
@@ -142,10 +140,31 @@ export const TetrisFrame: FC = ()=>{
             locationY:15 + offset.y,
         }
     }
-
+    let gameOverArgs:GameOverProps = {
+        structure:GameOver,
+        colorNum: 8,
+        locationX: 0 + offset.x,
+        locationY: 0 + offset.y,
+        onClick  : {
+            retry: ()=>{reset()},
+            top  : ()=>{setGameMode(0)},
+        }
+    }
+    let titleArgs:TitleProps = {
+        structure:_Title,
+        colorNum: 0,
+        locationX: 0 + offset.x,
+        locationY: 0 + offset.y,
+        onClick  : {
+            retry: ()=>{reset()},
+            config: ()=>{reset()},
+        }
+    }
     return (
         <div ref={inputRef} className="div__tetrisFrame1" onKeyDown={keyDownEvent} tabIndex={0}>
             <Frame {...frameArgs} />
+            {gameMode === 2 && <GGameOver {...gameOverArgs} />}
+            {gameMode === 0 && <Title {...titleArgs} />}
         </div>
     )
 }

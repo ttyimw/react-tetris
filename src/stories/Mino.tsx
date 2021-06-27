@@ -11,7 +11,7 @@ export interface MinoProps {
 /**
  * Mino
  */
-export const Mino: React.FC<MinoProps> = ({
+export const Mino: React.FC<MinoProps> = React.memo(({
     structure,
     colorNum  = 0,
     locationX = 0,
@@ -38,4 +38,4 @@ export const Mino: React.FC<MinoProps> = ({
     }
 
     return (<>{mino}</>)
-}
+})

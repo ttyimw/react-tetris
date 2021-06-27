@@ -18,16 +18,11 @@ let scoreCSS: React.CSSProperties = {
     top         : 0,
     fontSize    : '16px',
     color       : '#eee',
-    font: 'italic small-caps bold 16px/2 cursive',
-    // borderWidth : '10px',
-    // borderStyle : 'double',
-    // borderRadius: '10px',
-    // boxShadow   : '1px 1px 1px 0px rgba(0,0,0,0.3)'
+    // font: 'italic small-caps bold 16px/2 cursive',
 }
 
 const tableCSS: React.CSSProperties = {
     width       : '160px',
-    // height      : '100px',
     textAlign   : 'left',
     position    : 'relative',
 }
