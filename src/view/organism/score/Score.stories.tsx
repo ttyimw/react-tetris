@@ -13,5 +13,5 @@ Stack1.args = {
     level: 100,
     score: 10000,
     locationX: 0,
-    locationY: 0,
+    locationY: 0
 }

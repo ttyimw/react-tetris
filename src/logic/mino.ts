@@ -1,4 +1,4 @@
-import { tetriMinos } from "../stories/structure"
+import { tetriMinos } from "../view/assets/structure"
 
 export const tetriMino = (()=> {
 

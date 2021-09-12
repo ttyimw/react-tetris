@@ -1,7 +1,7 @@
 import React from 'react'
 import { Story, Meta } from '@storybook/react'
 import { GGameOver, GameOverProps } from './GameOver'
-import {GameOver} from './structure'
+import { GameOver } from '../../assets/structure'
 
 export default {
     title: 'Organism/GameOver',

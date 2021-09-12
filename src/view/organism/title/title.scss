@@ -1,4 +1,4 @@
-.span__gameover1 {
+.span__title1 {
     cursor : pointer;
     margin : 25% auto;
     width  : 220px;
@@ -7,4 +7,10 @@
     font-size:40px;
     color  : white;
     font-weight: bold;
+}
+.title {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color:#000;
 }
