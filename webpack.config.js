@@ -5,7 +5,7 @@ const enabledSourceMap = true;
 
 module.exports = [{
     // watch: true,
-    mode: 'development',
+    mode: 'production',
     entry: {
         bundle: './src/index.tsx'
     },
